@@ -1,5 +1,6 @@
 package io.barth.employeemanagementsystem.employee;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ public class Controller {
     }
 
     @PostMapping("employee")
-    public Employee createEmployee(@RequestBody Employee employee){
+    public Employee createEmployee(@Valid @RequestBody Employee employee){
         return employeeServiceImp.createEmployee(employee);
     }
 

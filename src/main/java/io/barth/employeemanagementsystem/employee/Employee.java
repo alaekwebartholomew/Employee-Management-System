@@ -1,10 +1,13 @@
 package io.barth.employeemanagementsystem.employee;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.util.Date;
 
 @Data
 @Entity
@@ -14,11 +17,22 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "First name can't be null")
     private String firstName;
     private String lastName;
-    private Long age;
+    private Long age = 0L;
     private String location;
+
+    @Email(message = "Enter valid email")
     private String email;
-    private Boolean remote;
+
+    private Boolean remote = false;
     private String department;
+
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
+    private Date createdAt;
+
+    @UpdateTimestamp
+    private Date updatedAt;
 }
