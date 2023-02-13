@@ -1,4 +1,7 @@
 package io.barth.employeemanagementsystem.employee;
 
-public interface Repository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+@org.springframework.stereotype.Repository
+public interface Repository extends JpaRepository<Employee, Long> {
 }
