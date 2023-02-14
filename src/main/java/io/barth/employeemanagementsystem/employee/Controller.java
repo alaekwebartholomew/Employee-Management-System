@@ -15,8 +15,8 @@ public class Controller {
     private EmployeeServiceImp employeeServiceImp;
 
     @GetMapping("employee")
-    public ResponseEntity<List<Employee>> getEmployees(){
-        return new ResponseEntity<>(employeeServiceImp.getEmployees(), HttpStatus.OK);
+    public ResponseEntity<List<Employee>> getEmployees(@RequestParam Integer pageNumber, @RequestParam Integer pageSize){
+        return new ResponseEntity<>(employeeServiceImp.getEmployees(pageNumber, pageSize), HttpStatus.OK);
     }
 
     @GetMapping("employee/{id}")
@@ -30,7 +30,7 @@ public class Controller {
     }
 
     @PutMapping("employee/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable long id, @RequestBody Employee employee){
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employee){
         employee.setId(id);
         return new ResponseEntity<>(employeeServiceImp.updatedEmployee(employee), HttpStatus.CREATED);
     }
@@ -39,5 +39,20 @@ public class Controller {
     public ResponseEntity<HttpStatus> deleteEmployee(@PathVariable Long id){
         employeeServiceImp.deleteEmployee(id);
         return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("employee/findByDepartment")
+    public ResponseEntity<List<Employee>> getEmployeeByDepartment(@RequestParam String department){
+        return new ResponseEntity<>(employeeServiceImp.getEmployeeByDepartment(department), HttpStatus.OK);
+    }
+
+    @GetMapping("employee/findByLocationAndRemote")
+    public ResponseEntity<List<Employee>> getEmployeeByLocationAndRemote(@RequestParam String location, @RequestParam Boolean remote){
+        return new ResponseEntity<>(employeeServiceImp.getEmployeeByLocationAndRemote(location, remote), HttpStatus.OK);
+    }
+
+    @GetMapping("employee/findByKeyword")
+    public ResponseEntity<List<Employee>> getEmployeeByKeyword(@RequestParam String  name){
+        return new ResponseEntity<>(employeeServiceImp.getEmployeeByKeyword(name), HttpStatus.OK);
     }
 }

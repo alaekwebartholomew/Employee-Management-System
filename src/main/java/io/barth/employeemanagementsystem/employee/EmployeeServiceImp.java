@@ -1,8 +1,10 @@
 package io.barth.employeemanagementsystem.employee;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,8 +13,11 @@ public class EmployeeServiceImp implements EmployeeService {
 
     @Autowired
     private Repository repository;
+
+    @Autowired
+    private Pagination pagination;
     @Override
-    public List<Employee> getEmployees() {
+    public List<Employee> getEmployees(int pageNumber, int pageSize) {
         return repository.findAll();
     }
 
@@ -38,5 +43,26 @@ public class EmployeeServiceImp implements EmployeeService {
     @Override
     public void deleteEmployee(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<Employee> getEmployeeByDepartment(String department) {
+        return repository.findByDepartment(department);
+    }
+
+    @Override
+    public List<Employee> getEmployeeByLocationAndRemote(String location, Boolean remote) {
+        return repository.findByLocationAndRemote(location,remote);
+    }
+
+    @Override
+    public List<Employee> getEmployeeByKeyword(String name) {
+        return repository.findByFirstNameContaining(name);
+    }
+
+    @Override
+    public List<Employee> getEmployeeByPage(int pageNumber, int pageSize) {
+        Pageable pages = PageRequest.of(pageNumber, pageSize);
+        return pagination.findAll(pages).g
     }
 }

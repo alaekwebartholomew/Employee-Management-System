@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public interface EmployeeService {
 
-    public List<Employee> getEmployees();
+    public List<Employee> getEmployees(int pageNumber, int pageSize);
 
     public Employee createEmployee(Employee employee);
 
@@ -14,4 +14,12 @@ public interface EmployeeService {
     public Employee updatedEmployee(Employee employee);
 
     public void deleteEmployee(Long id);
+
+    public List<Employee> getEmployeeByDepartment(String department);
+
+    public List<Employee> getEmployeeByLocationAndRemote(String location, Boolean remote);
+
+    public List<Employee> getEmployeeByKeyword(String name);
+
+    public List<Employee> getEmployeeByPage(int pageNumber, int pageSize);
 }
