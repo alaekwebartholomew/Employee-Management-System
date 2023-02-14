@@ -62,8 +62,8 @@ public class EmployeeServiceImp implements EmployeeService {
 
     @Override
     public List<Employee> getEmployeeByKeyword(String name) {
-
-        return repository.findByFirstNameContaining(name);
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        return repository.findByFirstNameContaining(name, sort);
     }
 
 }

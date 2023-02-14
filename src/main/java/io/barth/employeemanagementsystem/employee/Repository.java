@@ -1,5 +1,6 @@
 package io.barth.employeemanagementsystem.employee;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -10,7 +11,7 @@ public interface Repository extends JpaRepository<Employee, Long> {
     List<Employee> findByDepartment(String department);
     List<Employee> findByLocationAndRemote(String location, Boolean remote);
 
-    List<Employee> findByFirstNameContaining(String keyword);
+    List<Employee> findByFirstNameContaining(String keyword, Sort sort);
 
 
 }
