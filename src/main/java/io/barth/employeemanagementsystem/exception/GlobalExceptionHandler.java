@@ -23,10 +23,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         body.put("timestamp", System.currentTimeMillis());
         body.put("status", status.value());
 
-        List<String> error = ex.getBindingResult().getFieldErrors()
+        List<String> errors = ex.getBindingResult().getFieldErrors()
                 .stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
-        body.put("error", error);
+        body.put("errors", errors);
 
-        return new ResponseEntity<>(body, status);
-    }
+        return new ResponseEntity<Object>(body, status);
+    };
 }

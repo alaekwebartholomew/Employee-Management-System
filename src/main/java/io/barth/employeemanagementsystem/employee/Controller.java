@@ -2,6 +2,8 @@ package io.barth.employeemanagementsystem.employee;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,28 +15,29 @@ public class Controller {
     private EmployeeServiceImp employeeServiceImp;
 
     @GetMapping("employee")
-    public List<Employee> getEmployees(){
-        return employeeServiceImp.getEmployees();
+    public ResponseEntity<List<Employee>> getEmployees(){
+        return new ResponseEntity<>(employeeServiceImp.getEmployees(), HttpStatus.OK);
     }
 
     @GetMapping("employee/{id}")
-    public Employee getEmployee(@PathVariable Long id){
-        return employeeServiceImp.getEmployee(id);
+    public ResponseEntity<Employee> getEmployee(@PathVariable Long id){
+        return new ResponseEntity<>(employeeServiceImp.getEmployee(id), HttpStatus.OK);
     }
 
     @PostMapping("employee")
-    public Employee createEmployee(@Valid @RequestBody Employee employee){
-        return employeeServiceImp.createEmployee(employee);
+    public ResponseEntity<Employee> createEmployee(@Valid @RequestBody Employee employee){
+        return new ResponseEntity<>(employeeServiceImp.createEmployee(employee), HttpStatus.CREATED);
     }
 
     @PutMapping("employee/{id}")
-    public Employee updateEmployee(@PathVariable long id, @RequestBody Employee employee){
+    public ResponseEntity<Employee> updateEmployee(@PathVariable long id, @RequestBody Employee employee){
         employee.setId(id);
-        return employeeServiceImp.updatedEmployee(employee);
+        return new ResponseEntity<>(employeeServiceImp.updatedEmployee(employee), HttpStatus.CREATED);
     }
 
     @DeleteMapping("employee/{id}")
-    public void deleteEmployee(@PathVariable Long id){
+    public ResponseEntity<HttpStatus> deleteEmployee(@PathVariable Long id){
         employeeServiceImp.deleteEmployee(id);
+        return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
     }
 }
