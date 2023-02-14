@@ -18,7 +18,7 @@ public class EmployeeServiceImp implements EmployeeService {
 
     @Override
     public List<Employee> getEmployees(int pageNumber, int pageSize) {
-        PageRequest pages = PageRequest.of(pageNumber, pageSize);
+        PageRequest pages = PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "id");
         Page<Employee> employees = repository.findAll(pages);
         return employees.getContent();
     }
