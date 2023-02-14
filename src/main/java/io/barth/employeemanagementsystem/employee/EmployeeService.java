@@ -21,5 +21,4 @@ public interface EmployeeService {
 
     public List<Employee> getEmployeeByKeyword(String name);
 
-    public List<Employee> getEmployeeByPage(int pageNumber, int pageSize);
 }
