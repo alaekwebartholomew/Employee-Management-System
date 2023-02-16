@@ -14,8 +14,8 @@ public interface Repository extends JpaRepository<Employee, Long> {
 
     List<Employee> findByFirstNameContaining(String keyword, Sort sort);
 
-    @Query("FROM Employee WHERE name = :name or location = :location")
-    List<Employee> getEmployeeByNameAndByLocation(String name, String location);
+    @Query("FROM Employee WHERE firstName = :firstName or location = :location")
+    List<Employee> getEmployeeByFirstNameOrByLocation(String firstName, String location);
 
 
 }

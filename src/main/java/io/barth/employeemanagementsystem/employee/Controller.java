@@ -55,4 +55,9 @@ public class Controller {
     public ResponseEntity<List<Employee>> getEmployeeByKeyword(@RequestParam String  name){
         return new ResponseEntity<>(employeeServiceImp.getEmployeeByKeyword(name), HttpStatus.OK);
     }
+
+    @GetMapping("employee/{firstName}/{location}")
+    public ResponseEntity<List<Employee>> getEmployeeByFirstNameAndLocation(@PathVariable String  firstName, @PathVariable String location){
+        return new ResponseEntity<>(employeeServiceImp.getEmployeeByFirstNameOrLocation(firstName, location), HttpStatus.OK);
+    }
 }

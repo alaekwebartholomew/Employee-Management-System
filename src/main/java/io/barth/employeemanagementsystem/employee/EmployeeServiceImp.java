@@ -67,4 +67,9 @@ public class EmployeeServiceImp implements EmployeeService {
         return repository.findByFirstNameContaining(name, sort);
     }
 
+    @Override
+    public List<Employee> getEmployeeByFirstNameOrLocation(String name, String location) {
+        return repository.getEmployeeByFirstNameOrByLocation(name, location);
+    }
+
 }
