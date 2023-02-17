@@ -17,5 +17,8 @@ public interface Repository extends JpaRepository<Employee, Long> {
     @Query("FROM Employee WHERE firstName = :firstName or location = :location")
     List<Employee> getEmployeeByFirstNameOrByLocation(String firstName, String location);
 
+    @Query("DELETE FROM Employee WHERE firstName = :FirstName")
+    Integer deleteEmployeeByName(String name);
+
 
 }
