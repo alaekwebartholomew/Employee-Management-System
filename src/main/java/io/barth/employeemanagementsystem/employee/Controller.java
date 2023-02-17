@@ -60,4 +60,10 @@ public class Controller {
     public ResponseEntity<List<Employee>> getEmployeeByFirstNameAndLocation(@PathVariable String  firstName, @PathVariable String location){
         return new ResponseEntity<>(employeeServiceImp.getEmployeeByFirstNameOrLocation(firstName, location), HttpStatus.OK);
     }
+
+    @GetMapping("employee/delete/{firstName}")
+    public ResponseEntity<HttpStatus> deleteEmployeeByFirstName(@PathVariable String  firstName){
+        employeeServiceImp.deleteEmployeeByFirstName(firstName);
+        return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
+    }
 }
