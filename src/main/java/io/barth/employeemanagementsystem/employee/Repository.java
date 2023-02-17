@@ -18,7 +18,7 @@ public interface Repository extends JpaRepository<Employee, Long> {
     List<Employee> getEmployeeByFirstNameOrByLocation(String firstName, String location);
 
     @Query("DELETE FROM Employee WHERE firstName = :FirstName")
-    Integer deleteEmployeeByName(String name);
+    Integer deleteEmployeeByFirstName(String name);
 
 
 }

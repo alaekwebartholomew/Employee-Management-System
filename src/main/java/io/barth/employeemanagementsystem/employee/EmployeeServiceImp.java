@@ -72,4 +72,9 @@ public class EmployeeServiceImp implements EmployeeService {
         return repository.getEmployeeByFirstNameOrByLocation(name, location);
     }
 
+    @Override
+    public Integer deleteEmployeeByFirstName(String name) {
+        return repository.deleteEmployeeByFirstName(name);
+    }
+
 }
