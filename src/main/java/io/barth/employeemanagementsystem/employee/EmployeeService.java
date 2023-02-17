@@ -25,6 +25,6 @@ public interface EmployeeService {
 
     public List<Employee> getEmployeeByFirstNameOrLocation(String name, String location);
 
-    void deleteEmployeeByFirstName(String name);
+    Integer deleteEmployeeByFirstName(String name);
 
 }

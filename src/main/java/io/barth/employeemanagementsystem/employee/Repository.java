@@ -2,8 +2,10 @@ package io.barth.employeemanagementsystem.employee;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,8 +19,10 @@ public interface Repository extends JpaRepository<Employee, Long> {
     @Query("FROM Employee WHERE firstName = :firstName or location = :location")
     List<Employee> getEmployeeByFirstNameOrByLocation(String firstName, String location);
 
-    @Query("DELETE FROM Employee WHERE firstName = :FirstName")
-    void deleteEmployeeByFirstName(String name);
+    @Transactional
+    @Modifying
+    @Query("DELETE FROM Employee WHERE firstName = :firstName")
+    Integer deleteEmployeeByFirstName(String firstName);
 
 
 }

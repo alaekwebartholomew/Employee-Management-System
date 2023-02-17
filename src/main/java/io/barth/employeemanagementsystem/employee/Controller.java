@@ -62,8 +62,7 @@ public class Controller {
     }
 
     @GetMapping("employee/delete/{firstName}")
-    public ResponseEntity<HttpStatus> deleteEmployeeByFirstName(@PathVariable String  firstName){
-        employeeServiceImp.deleteEmployeeByFirstName(firstName);
-        return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<Integer> deleteEmployeeByFirstName(@PathVariable String  firstName){
+        return new ResponseEntity<Integer>(employeeServiceImp.deleteEmployeeByFirstName(firstName), HttpStatus.NO_CONTENT);
     }
 }
