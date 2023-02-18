@@ -32,18 +32,21 @@ public class Controller {
         return new ResponseEntity<>(employeeServiceImp.createEmployee(employee), HttpStatus.CREATED);
     }
 
+    // Update an employee
     @PutMapping("employee/{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employee){
         employee.setId(id);
         return new ResponseEntity<>(employeeServiceImp.updatedEmployee(employee), HttpStatus.CREATED);
     }
 
+    // Delete an employee
     @DeleteMapping("employee/{id}")
     public ResponseEntity<HttpStatus> deleteEmployee(@PathVariable Long id){
         employeeServiceImp.deleteEmployee(id);
         return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
     }
 
+    // Get employee by department
     @GetMapping("employee/findByDepartment")
     public ResponseEntity<List<Employee>> getEmployeeByDepartment(@RequestParam String department){
         return new ResponseEntity<>(employeeServiceImp.getEmployeeByDepartment(department), HttpStatus.OK);
