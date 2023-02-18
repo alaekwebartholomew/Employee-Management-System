@@ -64,11 +64,13 @@ public class Controller {
         return new ResponseEntity<>(employeeServiceImp.getEmployeeByKeyword(name), HttpStatus.OK);
     }
 
+    // Get employee by first name and location
     @GetMapping("employee/{firstName}/{location}")
     public ResponseEntity<List<Employee>> getEmployeeByFirstNameAndLocation(@PathVariable String  firstName, @PathVariable String location){
         return new ResponseEntity<>(employeeServiceImp.getEmployeeByFirstNameOrLocation(firstName, location), HttpStatus.OK);
     }
 
+    // delete employee by first name
     @GetMapping("employee/delete/{firstName}")
     public ResponseEntity<String> deleteEmployeeByFirstName(@PathVariable String  firstName){
         return new ResponseEntity<String>(employeeServiceImp.deleteEmployeeByFirstName(firstName)+" Number of content deleted", HttpStatus.NO_CONTENT);
