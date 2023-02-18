@@ -52,11 +52,13 @@ public class Controller {
         return new ResponseEntity<>(employeeServiceImp.getEmployeeByDepartment(department), HttpStatus.OK);
     }
 
+    // Get employee by location and remote
     @GetMapping("employee/findByLocationAndRemote")
     public ResponseEntity<List<Employee>> getEmployeeByLocationAndRemote(@RequestParam String location, @RequestParam Boolean remote){
         return new ResponseEntity<>(employeeServiceImp.getEmployeeByLocationAndRemote(location, remote), HttpStatus.OK);
     }
 
+    // Get employee by keyword
     @GetMapping("employee/findByKeyword")
     public ResponseEntity<List<Employee>> getEmployeeByKeyword(@RequestParam String  name){
         return new ResponseEntity<>(employeeServiceImp.getEmployeeByKeyword(name), HttpStatus.OK);
