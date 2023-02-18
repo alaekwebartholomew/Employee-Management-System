@@ -14,16 +14,19 @@ public class Controller {
     @Autowired
     private EmployeeServiceImp employeeServiceImp;
 
+    // Get all employee
     @GetMapping("employee")
     public ResponseEntity<List<Employee>> getEmployees(@RequestParam Integer pageNumber, @RequestParam Integer pageSize){
         return new ResponseEntity<>(employeeServiceImp.getEmployees(pageNumber, pageSize), HttpStatus.OK);
     }
 
+    // Get employee by Id
     @GetMapping("employee/{id}")
     public ResponseEntity<Employee> getEmployee(@PathVariable Long id){
         return new ResponseEntity<>(employeeServiceImp.getEmployee(id), HttpStatus.OK);
     }
 
+    // Create an employee
     @PostMapping("employee")
     public ResponseEntity<Employee> createEmployee(@Valid @RequestBody Employee employee){
         return new ResponseEntity<>(employeeServiceImp.createEmployee(employee), HttpStatus.CREATED);
@@ -62,7 +65,7 @@ public class Controller {
     }
 
     @GetMapping("employee/delete/{firstName}")
-    public ResponseEntity<Integer> deleteEmployeeByFirstName(@PathVariable String  firstName){
-        return new ResponseEntity<Integer>(employeeServiceImp.deleteEmployeeByFirstName(firstName), HttpStatus.NO_CONTENT);
+    public ResponseEntity<String> deleteEmployeeByFirstName(@PathVariable String  firstName){
+        return new ResponseEntity<String>(employeeServiceImp.deleteEmployeeByFirstName(firstName)+" Number of content deleted", HttpStatus.NO_CONTENT);
     }
 }
