@@ -70,7 +70,7 @@ public class Controller {
         return new ResponseEntity<>(employeeServiceImp.getEmployeeByFirstNameOrLocation(firstName, location), HttpStatus.OK);
     }
 
-    // delete employee by first name
+    // delete single employee by first name
     @GetMapping("employee/delete/{firstName}")
     public ResponseEntity<String> deleteEmployeeByFirstName(@PathVariable String  firstName){
         return new ResponseEntity<String>(employeeServiceImp.deleteEmployeeByFirstName(firstName)+" Number of content deleted", HttpStatus.NO_CONTENT);
