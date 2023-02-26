@@ -70,4 +70,9 @@ public class Controller {
         return new ResponseEntity<List<Employee>>(employeeServiceImp.getEmployeeByDepartment(name), HttpStatus.OK);
     }
 
+    @GetMapping("employee/query/{name}")
+    ResponseEntity<List<Employee>> getByDepartment(@PathVariable String name){
+        return new ResponseEntity<List<Employee>>(employeeServiceImp.getByDepartment(name), HttpStatus.OK);
+    }
+
 }

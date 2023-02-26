@@ -54,4 +54,8 @@ public class EmployeeServiceImp implements EmployeeService {
         return repository.findByDepartmentName(name);
     }
 
+    List<Employee> getByDepartment(String name){
+        return repository.getByDept(name);
+    }
+
 }
