@@ -50,31 +50,8 @@ public class EmployeeServiceImp implements EmployeeService {
         repository.deleteById(id);
     }
 
-    @Override
-    public List<Employee> getEmployeeByDepartment(String department) {
-
-        return repository.findByDepartment(department);
-    }
-
-    @Override
-    public List<Employee> getEmployeeByLocationAndRemote(String location, Boolean remote) {
-        return repository.findByLocationAndRemote(location,remote);
-    }
-
-    @Override
-    public List<Employee> getEmployeeByKeyword(String name) {
-        Sort sort = Sort.by(Sort.Direction.DESC, "id");
-        return repository.findByFirstNameContaining(name, sort);
-    }
-
-    @Override
-    public List<Employee> getEmployeeByFirstNameOrLocation(String name, String location) {
-        return repository.getEmployeeByFirstNameOrByLocation(name, location);
-    }
-
-    @Override
-    public Integer deleteEmployeeByFirstName(String name) {
-        return repository.deleteEmployeeByFirstName(name);
+    List<Employee> getEmployeeByDepartment(String name){
+        return repository.findByDepartmentName(name);
     }
 
 }

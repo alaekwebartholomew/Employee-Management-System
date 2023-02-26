@@ -17,14 +17,4 @@ public interface EmployeeService {
 
     public void deleteEmployee(Long id);
 
-    public List<Employee> getEmployeeByDepartment(String department);
-
-    public List<Employee> getEmployeeByLocationAndRemote(String location, Boolean remote);
-
-    public List<Employee> getEmployeeByKeyword(String name);
-
-    public List<Employee> getEmployeeByFirstNameOrLocation(String name, String location);
-
-    Integer deleteEmployeeByFirstName(String name);
-
 }

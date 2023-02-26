@@ -1,17 +1,20 @@
 package io.barth.employeemanagementsystem.employee;
 
+import io.barth.employeemanagementsystem.department.Department;
+import io.barth.employeemanagementsystem.utils.EmployeeRequest;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 
 @Data
+@NoArgsConstructor
 @Entity
 public class Employee {
 
@@ -20,16 +23,18 @@ public class Employee {
     private Long id;
 
     @NotBlank(message = "First name shouldn't be null")
-    private String firstName;
-    private String lastName;
+    private String name;
     private Long age = 0L;
     private String location;
+
+    @JoinColumn(name = "departmentId")
+    @OneToOne
+    private Department department;
 
     @Email(message = "Enter valid email")
     private String email;
 
     private Boolean remote = false;
-    private String department;
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
@@ -37,4 +42,8 @@ public class Employee {
 
     @UpdateTimestamp
     private Date updatedAt;
+
+    public Employee(@Valid EmployeeRequest request) {
+        this.name = request.getName();
+    }
 }

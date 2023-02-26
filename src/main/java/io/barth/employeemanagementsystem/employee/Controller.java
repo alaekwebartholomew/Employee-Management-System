@@ -1,5 +1,8 @@
 package io.barth.employeemanagementsystem.employee;
 
+import io.barth.employeemanagementsystem.department.Department;
+import io.barth.employeemanagementsystem.department.DepartmentRepository;
+import io.barth.employeemanagementsystem.utils.EmployeeRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +16,9 @@ public class Controller {
 
     @Autowired
     private EmployeeServiceImp employeeServiceImp;
+
+    @Autowired
+    private DepartmentRepository departmentRepository;
 
     // Get all employee
     @GetMapping("employee")
@@ -28,8 +34,21 @@ public class Controller {
 
     // Create an employee
     @PostMapping("employee")
-    public ResponseEntity<Employee> createEmployee(@Valid @RequestBody Employee employee){
-        return new ResponseEntity<>(employeeServiceImp.createEmployee(employee), HttpStatus.CREATED);
+    public ResponseEntity<Employee> createEmployee(@Valid @RequestBody EmployeeRequest employeeRequest){
+        Department department = new Department();
+        department.setName(employeeRequest.getDepartment());
+        department = departmentRepository.save(department);
+
+        Employee employee = new Employee(employeeRequest);
+        employee.setDepartment(department);
+        employee.setAge(employeeRequest.getAge());
+        employee.setEmail(employeeRequest.getEmail());
+        employee.setLocation(employeeRequest.getLocation());
+        employee.setRemote(employeeRequest.getRemote());
+        employee = employeeServiceImp.createEmployee(employee);
+
+        return new ResponseEntity<Employee>(employee, HttpStatus.CREATED);
+
     }
 
     // Update an employee
@@ -46,33 +65,9 @@ public class Controller {
         return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
     }
 
-    // Get employee by department
-    @GetMapping("employee/findByDepartment")
-    public ResponseEntity<List<Employee>> getEmployeeByDepartment(@RequestParam String department){
-        return new ResponseEntity<>(employeeServiceImp.getEmployeeByDepartment(department), HttpStatus.OK);
+    @GetMapping("employee/filter/{name}")
+    ResponseEntity<List<Employee>> getEmployeeByDepartment(@PathVariable String name){
+        return new ResponseEntity<List<Employee>>(employeeServiceImp.getEmployeeByDepartment(name), HttpStatus.OK);
     }
 
-    // Get employee by location and remote
-    @GetMapping("employee/findByLocationAndRemote")
-    public ResponseEntity<List<Employee>> getEmployeeByLocationAndRemote(@RequestParam String location, @RequestParam Boolean remote){
-        return new ResponseEntity<>(employeeServiceImp.getEmployeeByLocationAndRemote(location, remote), HttpStatus.OK);
-    }
-
-    // Get employee by keyword
-    @GetMapping("employee/findByKeyword")
-    public ResponseEntity<List<Employee>> getEmployeeByKeyword(@RequestParam String  name){
-        return new ResponseEntity<>(employeeServiceImp.getEmployeeByKeyword(name), HttpStatus.OK);
-    }
-
-    // Get employee by first name and location
-    @GetMapping("employee/{firstName}/{location}")
-    public ResponseEntity<List<Employee>> getEmployeeByFirstNameAndLocation(@PathVariable String  firstName, @PathVariable String location){
-        return new ResponseEntity<>(employeeServiceImp.getEmployeeByFirstNameOrLocation(firstName, location), HttpStatus.OK);
-    }
-
-    // delete single employee by first name
-    @GetMapping("employee/delete/{firstName}")
-    public ResponseEntity<String> deleteEmployeeByFirstName(@PathVariable String  firstName){
-        return new ResponseEntity<String>(employeeServiceImp.deleteEmployeeByFirstName(firstName)+" Number of content deleted", HttpStatus.NO_CONTENT);
-    }
 }
