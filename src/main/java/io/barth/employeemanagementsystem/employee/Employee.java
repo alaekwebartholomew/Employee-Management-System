@@ -27,10 +27,6 @@ public class Employee {
     private Long age = 0L;
     private String location;
 
-    @JoinColumn(name = "departmentId")
-    @OneToOne
-    private Department department;
-
     @Email(message = "Enter valid email")
     private String email;
 

@@ -34,20 +34,16 @@ public class Controller {
 
     // Create an employee
     @PostMapping("employee")
-    public ResponseEntity<Employee> createEmployee(@Valid @RequestBody EmployeeRequest employeeRequest){
-        Department department = new Department();
-        department.setName(employeeRequest.getDepartment());
-        department = departmentRepository.save(department);
-
-        Employee employee = new Employee(employeeRequest);
-        employee.setDepartment(department);
-        employee.setAge(employeeRequest.getAge());
-        employee.setEmail(employeeRequest.getEmail());
-        employee.setLocation(employeeRequest.getLocation());
-        employee.setRemote(employeeRequest.getRemote());
+    public ResponseEntity<String> createEmployee(@Valid @RequestBody EmployeeRequest employeeRequest){
+        Employee employee = new Employee();
         employee = employeeServiceImp.createEmployee(employee);
 
-        return new ResponseEntity<Employee>(employee, HttpStatus.CREATED);
+        for(String e: employeeRequest.getDepartment()){
+            Department department = new Department();
+            department.setName(e);
+            department.setEmployee(employee);
+            employeeServiceImp.createEmployee(department);
+        }
 
     }
 

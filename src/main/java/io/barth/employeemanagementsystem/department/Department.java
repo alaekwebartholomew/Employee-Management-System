@@ -1,9 +1,7 @@
 package io.barth.employeemanagementsystem.department;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import io.barth.employeemanagementsystem.employee.Employee;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -15,4 +13,8 @@ public class Department {
     private Long id;
 
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "employeeId")
+    private Employee employee;
 }

@@ -50,12 +50,4 @@ public class EmployeeServiceImp implements EmployeeService {
         repository.deleteById(id);
     }
 
-    List<Employee> getEmployeeByDepartment(String name){
-        return repository.findByDepartmentName(name);
-    }
-
-    List<Employee> getByDepartment(String name){
-        return repository.getByDept(name);
-    }
-
 }

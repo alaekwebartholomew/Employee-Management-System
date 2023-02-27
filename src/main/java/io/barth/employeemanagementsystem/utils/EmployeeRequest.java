@@ -3,6 +3,7 @@ package io.barth.employeemanagementsystem.utils;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class EmployeeRequest {
@@ -11,7 +12,7 @@ public class EmployeeRequest {
     private Long age = 0L;
     private String location;
 
-    private String department;
+    private List<String> department;
 
     private String email;
 
