@@ -32,7 +32,7 @@ public class Controller {
         return new ResponseEntity<>(employeeServiceImp.getEmployee(id), HttpStatus.OK);
     }
 
-    // Create an employee
+
     @PostMapping("employee")
     public ResponseEntity<String> createEmployee(@Valid @RequestBody EmployeeRequest employeeRequest){
         Employee employee = new Employee();
