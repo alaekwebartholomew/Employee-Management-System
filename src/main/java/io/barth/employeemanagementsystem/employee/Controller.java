@@ -20,7 +20,7 @@ public class Controller {
     @Autowired
     private DepartmentRepository departmentRepository;
 
-    // Get employees
+    // Get all employee
     @GetMapping("employee")
     public ResponseEntity<List<Employee>> getEmployees(@RequestParam Integer pageNumber, @RequestParam Integer pageSize){
         return new ResponseEntity<>(employeeServiceImp.getEmployees(pageNumber, pageSize), HttpStatus.OK);
