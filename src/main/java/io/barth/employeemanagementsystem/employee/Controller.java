@@ -35,15 +35,16 @@ public class Controller {
     // create employee
     @PostMapping("employee")
     public ResponseEntity<String> createEmployee(@Valid @RequestBody EmployeeRequest employeeRequest){
-        Employee employee = new Employee();
+        Employee employee = new Employee(employeeRequest);
         employee = employeeServiceImp.createEmployee(employee);
 
         for(String e: employeeRequest.getDepartment()){
             Department department = new Department();
             department.setName(e);
             department.setEmployee(employee);
-            employeeServiceImp.createEmployee(department);
+            departmentRepository.save(department);
         }
+        return new ResponseEntity<String>("Save",HttpStatus.CREATED);
 
     }
 
@@ -61,14 +62,5 @@ public class Controller {
         return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("employee/filter/{name}")
-    ResponseEntity<List<Employee>> getEmployeeByDepartment(@PathVariable String name){
-        return new ResponseEntity<List<Employee>>(employeeServiceImp.getEmployeeByDepartment(name), HttpStatus.OK);
-    }
-
-    @GetMapping("employee/query/{name}")
-    ResponseEntity<List<Employee>> getByDepartment(@PathVariable String name){
-        return new ResponseEntity<List<Employee>>(employeeServiceImp.getByDepartment(name), HttpStatus.OK);
-    }
 
 }

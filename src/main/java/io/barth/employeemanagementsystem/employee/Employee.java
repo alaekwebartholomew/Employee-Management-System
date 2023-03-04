@@ -41,5 +41,9 @@ public class Employee {
 
     public Employee(@Valid EmployeeRequest request) {
         this.name = request.getName();
+        this.age = request.getAge();
+        this.remote = request.getRemote();
+        this.email = request.getEmail();
+        this.location = request.getLocation();
     }
 }
